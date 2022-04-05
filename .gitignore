@@ -1,0 +1,9 @@
+.vscode/
+.idea/
+.env
+auth_srv.*
+__debug_bin
+.DS_Store
+upload
+go.sum
+tmp
