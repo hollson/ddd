@@ -6,38 +6,39 @@ import (
 	"sync"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
-	"github.com/percybolmer/ddd-go/domain/customer"
+	"github.com/hollson/ddd1/domain/agg"
+
+	"github.com/hollson/ddd1/domain/customer"
 )
 
 // CustomerRepo fulfills the CustomerRepository interface
 type CustomerRepo struct {
-	customers map[uuid.UUID]aggregate.Customer
+	customers map[uuid.UUID]agg.Customer
 	sync.Mutex
 }
 
 // New is a factory function to generate a new repository of customers
 func New() *CustomerRepo {
 	return &CustomerRepo{
-		customers: make(map[uuid.UUID]aggregate.Customer),
+		customers: make(map[uuid.UUID]agg.Customer),
 	}
 }
 
 // Get finds a customer by ID
-func (mr *CustomerRepo) Get(id uuid.UUID) (aggregate.Customer, error) {
+func (mr *CustomerRepo) Get(id uuid.UUID) (agg.Customer, error) {
 	if customer, ok := mr.customers[id]; ok {
 		return customer, nil
 	}
 
-	return aggregate.Customer{}, customer.ErrCustomerNotFound
+	return agg.Customer{}, customer.ErrCustomerNotFound
 }
 
 // Add will add a new customer to the repository
-func (mr *CustomerRepo) Add(c aggregate.Customer) error {
+func (mr *CustomerRepo) Add(c agg.Customer) error {
 	if mr.customers == nil {
 		// Saftey check if customers is not create, shouldn't happen if using the Factory, but you never know
 		mr.Lock()
-		mr.customers = make(map[uuid.UUID]aggregate.Customer)
+		mr.customers = make(map[uuid.UUID]agg.Customer)
 		mr.Unlock()
 	}
 	// Make sure Customer isn't already in the repository
@@ -51,7 +52,7 @@ func (mr *CustomerRepo) Add(c aggregate.Customer) error {
 }
 
 // Update will replace an existing customer information with the new customer information
-func (mr *CustomerRepo) Update(c aggregate.Customer) error {
+func (mr *CustomerRepo) Update(c agg.Customer) error {
 	if _, ok := mr.customers[c.GetID()]; !ok {
 		return fmt.Errorf("customer does not exist: %w", customer.ErrUpdateCustomer)
 	}

@@ -1,4 +1,4 @@
-module github.com/percybolmer/ddd-go
+module github.com/hollson/ddd1
 
 go 1.17
 

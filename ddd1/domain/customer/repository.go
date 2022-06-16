@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
+	"github.com/hollson/ddd1/domain/agg"
 )
 
 var (
@@ -15,7 +15,7 @@ var (
 
 // Repository 客户「仓储接口」
 type Repository interface {
-	Get(uuid.UUID) (aggregate.Customer, error)
-	Add(aggregate.Customer) error
-	Update(aggregate.Customer) error
+	Get(uuid.UUID) (agg.Customer, error)
+	Add(agg.Customer) error
+	Update(agg.Customer) error
 }

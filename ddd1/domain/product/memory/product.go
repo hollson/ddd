@@ -5,28 +5,28 @@ import (
 	"sync"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
-	"github.com/percybolmer/ddd-go/domain/product"
+	"github.com/hollson/ddd1/domain/agg"
+	"github.com/hollson/ddd1/domain/product"
 )
 
 type ProductRepo struct {
-	products map[uuid.UUID]aggregate.Product
+	products map[uuid.UUID]agg.Product
 	sync.Mutex
 }
 
 // New is a factory function to generate a new repository of customers
 func New() *ProductRepo {
 	return &ProductRepo{
-		products: make(map[uuid.UUID]aggregate.Product),
+		products: make(map[uuid.UUID]agg.Product),
 	}
 }
 
 // GetAll returns all products as a slice
 // Yes, it never returns an error, but
 // A database implementation could return an error for instance
-func (mpr *ProductRepo) GetAll() ([]aggregate.Product, error) {
+func (mpr *ProductRepo) GetAll() ([]agg.Product, error) {
 	// Collect all Products from map
-	var products []aggregate.Product
+	var products []agg.Product
 	for _, product := range mpr.products {
 		products = append(products, product)
 	}
@@ -34,15 +34,15 @@ func (mpr *ProductRepo) GetAll() ([]aggregate.Product, error) {
 }
 
 // GetByID searches for a product based on it's ID
-func (mpr *ProductRepo) GetByID(id uuid.UUID) (aggregate.Product, error) {
+func (mpr *ProductRepo) GetByID(id uuid.UUID) (agg.Product, error) {
 	if product, ok := mpr.products[uuid.UUID(id)]; ok {
 		return product, nil
 	}
-	return aggregate.Product{}, product.ErrProductNotFound
+	return agg.Product{}, product.ErrProductNotFound
 }
 
 // Add will add a new product to the repository
-func (mpr *ProductRepo) Add(newprod aggregate.Product) error {
+func (mpr *ProductRepo) Add(newprod agg.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
 
@@ -56,7 +56,7 @@ func (mpr *ProductRepo) Add(newprod aggregate.Product) error {
 }
 
 // Update will change all values for a product based on it's ID
-func (mpr *ProductRepo) Update(upprod aggregate.Product) error {
+func (mpr *ProductRepo) Update(upprod agg.Product) error {
 	mpr.Lock()
 	defer mpr.Unlock()
 

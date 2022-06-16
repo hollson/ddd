@@ -8,21 +8,22 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
-	"github.com/percybolmer/ddd-go/services"
+	"github.com/hollson/ddd1/domain/agg"
+
+	"github.com/hollson/ddd1/services"
 )
 
-func makeProducts() []aggregate.Product {
-	p1 := aggregate.NewProduct("茅台", "这是白酒", 199)
-	p2 := aggregate.NewProduct("德芙", "这是巧克力", 0.99)
-	p3 := aggregate.NewProduct("乐事", "这是薯片", 2.88)
-	products := []aggregate.Product{*p1, *p2, *p3}
+func makeProducts() []agg.Product {
+	p1 := agg.NewProduct("茅台", "这是白酒", 199)
+	p2 := agg.NewProduct("德芙", "这是巧克力", 0.99)
+	p3 := agg.NewProduct("乐事", "这是薯片", 2.88)
+	products := []agg.Product{*p1, *p2, *p3}
 	return products
 }
 
 func ordertest() {
-	customer, _ := aggregate.NewCustomer("Percy") // 创建顾客
-	products := makeProducts()                    // 创建商品
+	customer, _ := agg.NewCustomer("Percy") // 创建顾客
+	products := makeProducts()              // 创建商品
 
 	// 订单服务,将顾客和商品关联起来
 	_orderService, err := services.NewOrderService(
@@ -58,7 +59,7 @@ func tavernt1() {
 		// t.Error(err)
 	}
 
-	cust, err := aggregate.NewCustomer("古灵精怪")
+	cust, err := agg.NewCustomer("古灵精怪")
 	if err != nil {
 	}
 
@@ -94,7 +95,7 @@ func tavern2() {
 		// t.Error(err)
 	}
 
-	cust, err := aggregate.NewCustomer("Percy")
+	cust, err := agg.NewCustomer("Percy")
 	if err != nil {
 		// t.Error(err)
 	}
@@ -112,8 +113,9 @@ func tavern2() {
 		// t.Error(err)
 	}
 }
+
 func main() {
-	// ordertest()
+	ordertest()
 	tavernt1()
-	// tavern2()
+	tavern2()
 }

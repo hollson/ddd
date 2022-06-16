@@ -5,7 +5,7 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
+	"github.com/hollson/ddd1/domain/agg"
 )
 
 var (
@@ -15,9 +15,9 @@ var (
 
 // Repository 产品「仓储接口」
 type Repository interface {
-	GetAll() ([]aggregate.Product, error)
-	GetByID(id uuid.UUID) (aggregate.Product, error)
-	Add(product aggregate.Product) error
-	Update(product aggregate.Product) error
+	GetAll() ([]agg.Product, error)
+	GetByID(id uuid.UUID) (agg.Product, error)
+	Add(product agg.Product) error
+	Update(product agg.Product) error
 	Delete(id uuid.UUID) error
 }

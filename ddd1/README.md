@@ -1,10 +1,11 @@
 # DDD in Go
-https://github.com/percybolmer/ddd-go
+
+https://github.com/hollson/ddd1
 
 https://programmingpercy.tech/blog/how-to-structure-ddd-in-go/
 
-
 **DDD六边形架构**
+
 ```shell
 ├── cmd				存放main.go等
 ├── adapter

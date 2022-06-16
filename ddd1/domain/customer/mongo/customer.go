@@ -5,7 +5,7 @@ import (
 	"context"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
+	"github.com/hollson/ddd1/domain/agg"
 )
 
 type CustomerRepo struct {
@@ -18,7 +18,7 @@ type mongoCustomer struct {
 	Name string    `bson:"name"`
 }
 
-func NewFromCustomer(c aggregate.Customer) mongoCustomer {
+func NewFromCustomer(c agg.Customer) mongoCustomer {
 	return mongoCustomer{
 		ID:   c.GetID(),
 		Name: c.GetName(),
@@ -27,8 +27,8 @@ func NewFromCustomer(c aggregate.Customer) mongoCustomer {
 
 // ToAggregate converts into a aggregate.Customer
 // this could validate all values present etc
-func (m mongoCustomer) ToAggregate() aggregate.Customer {
-	c := aggregate.Customer{}
+func (m mongoCustomer) ToAggregate() agg.Customer {
+	c := agg.Customer{}
 	c.SetID(m.ID)
 	c.SetName(m.Name)
 	return c
@@ -38,14 +38,14 @@ func New(ctx context.Context, conn string) (*CustomerRepo, error) {
 	panic("implement")
 }
 
-func (mr *CustomerRepo) Get(id uuid.UUID) (aggregate.Customer, error) {
+func (mr *CustomerRepo) Get(id uuid.UUID) (agg.Customer, error) {
 	panic("implement")
 }
 
-func (mr *CustomerRepo) Add(c aggregate.Customer) error {
+func (mr *CustomerRepo) Add(c agg.Customer) error {
 	panic("implement")
 }
 
-func (mr *CustomerRepo) Update(c aggregate.Customer) error {
+func (mr *CustomerRepo) Update(c agg.Customer) error {
 	panic("implement")
 }

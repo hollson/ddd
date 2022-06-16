@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/aggregate"
-	"github.com/percybolmer/ddd-go/domain/customer"
-	"github.com/percybolmer/ddd-go/domain/product"
+	"github.com/hollson/ddd1/domain/agg"
+	"github.com/hollson/ddd1/domain/customer"
+	"github.com/hollson/ddd1/domain/product"
 )
 
 // OrderService 聚合关系
@@ -33,7 +33,7 @@ func (o *OrderService) CreateOrder(customerID uuid.UUID, productIDs ...uuid.UUID
 		return 0, err
 	}
 
-	var products []aggregate.Product
+	var products []agg.Product
 	var price float64
 	for _, id := range productIDs {
 		p, err := o.Products.GetByID(id)
@@ -43,7 +43,6 @@ func (o *OrderService) CreateOrder(customerID uuid.UUID, productIDs ...uuid.UUID
 		products = append(products, p)
 		price += p.GetPrice()
 	}
-
 
 	fmt.Printf("顾客: %s「%s」 下单%d件商品，合计消费%v 元\n", c.GetName(), c.GetID(), len(products), price)
 

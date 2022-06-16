@@ -7,11 +7,11 @@ package services
 import (
 	"context"
 
-	"github.com/percybolmer/ddd-go/aggregate"
-	"github.com/percybolmer/ddd-go/domain/customer"
-	"github.com/percybolmer/ddd-go/domain/customer/memory"
-	"github.com/percybolmer/ddd-go/domain/customer/mongo"
-	prodmemory "github.com/percybolmer/ddd-go/domain/product/memory"
+	"github.com/hollson/ddd1/domain/agg"
+	"github.com/hollson/ddd1/domain/customer"
+	"github.com/hollson/ddd1/domain/customer/memory"
+	"github.com/hollson/ddd1/domain/customer/mongo"
+	prodmemory "github.com/hollson/ddd1/domain/product/memory"
 )
 
 type OrderOption func(os *OrderService) error
@@ -41,7 +41,7 @@ func WithMemoryCustomerRepository() OrderOption {
 	return WithCustomerRepository(cr)
 }
 
-func WithMemoryProductRepository(products ...aggregate.Product) OrderOption {
+func WithMemoryProductRepository(products ...agg.Product) OrderOption {
 	return func(os *OrderService) error {
 		pr := prodmemory.New()
 

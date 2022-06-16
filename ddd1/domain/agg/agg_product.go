@@ -1,11 +1,11 @@
-package aggregate
+package agg
 
 import (
 	"errors"
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/percybolmer/ddd-go/entity"
+	"github.com/hollson/ddd1/domain/entity"
 )
 
 var (
