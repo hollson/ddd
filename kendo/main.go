@@ -8,8 +8,17 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+// 加载配置文件、初始化数据库等
+func startUp() {
+	mysql.InitDB()
+	// redis.InitRedis()
+
+	// 启动领域层
+	domain.Start()
+}
+
 func main() {
-	StartUp()
+	startUp()
 	var eg errgroup.Group
 
 	// 启动Http服务
@@ -27,11 +36,3 @@ func main() {
 	}
 }
 
-// StartUp 加载配置文件、初始化数据库等
-func StartUp() {
-	mysql.InitDB()
-	// redis.InitRedis()
-
-	// 启动领域层
-	domain.Start()
-}
