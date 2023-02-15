@@ -22,7 +22,7 @@ require (
 	github.com/nats-io/nats-server/v2 v2.7.4 // indirect
 	github.com/onsi/ginkgo v1.14.2 // indirect
 	github.com/onsi/gomega v1.10.4 // indirect
-	github.com/prometheus/client_golang v1.6.0
+	github.com/prometheus/client_golang v1.11.1
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
